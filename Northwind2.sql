@@ -32,3 +32,13 @@ JOIN [Order] o ON o.EmployeeId = e.Id
 WHERE o.ShipCity NOT LIKE e.City
 GROUP BY e.Id
 ORDER BY COUNT(o.Id) DESC;
+
+--Get the shipping companies that processed orders for the category Seafood
+SELECT o.ShipName, c.CategoryName FROM [Order] o
+JOIN OrderDetail od ON od.OrderId = o.Id
+JOIN Product p ON p.Id = od.ProductId
+JOIN Category c ON c.Id = p.CategoryId
+WHERE c.CategoryName LIKE 'Seafood'
+GROUP BY o.ShipName;
+
+
